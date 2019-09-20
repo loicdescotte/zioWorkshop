@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+        @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+        body { font-family: 'Droid Serif'; }
+        h1, h2, h3 {
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: normal;
+        }
+        .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+</head>
+<body>
+<textarea id="source">
+
+class: center, middle
+
+# Purely functional webapp with ZIO and HTTP4s
+
+---
+
+# Agenda
+
+1. Introduction to pure FP
+2. Introduction to ZIO
+3. Coding a real service with Http4s
+4. Using the true power of ZIO
+5. Streaming with FS2
+
+---
+
+# Introduction to pure FP
+## Pure functions
+
+Pure functions
+
+1. Are total (a result for any input)
+2. Are deterministic (always the same result for the same input)
+3. Do not produce side effects (never modify something outside the function)
+
+---
+
+# Introduction to pure FP
+## Referential transparency
+
+In functional programming, referential transparency is defined as the fact that an expression,
+    may be replaced by its value without changing the result of the program.
+
+---
+
+# Introduction to ZIO
+## Examples
+
+What is the output of this program?
+
+```scala
+val future = Future(println("Hello"))
+
+// future is eager
+val program = for {
+_ <- future
+_ <- future
+} yield()
+```
+
+---
+# Introduction to ZIO
+## Examples
+
+What is the output of this program?
+
+```scala
+val zio = putStrLn("Hello")
+
+// ZIO is lazy and only describes the effects
+val program =
+for {
+  _ <- zio
+  _ <- zio
+} yield ()
+
+val runtime = new DefaultRuntime {}
+runtime.unsafeRun(program)
+```
+
+---
+# Introduction to ZIO
+## zio.App
+
+```scala
+object QuickstartApp extends App {
+
+  def run(args: List[String]) =
+    myAppLogic.fold(_ => 1, _ => 0)
+
+  val myAppLogic =
+    for {
+      _ <- putStrLn("Hello! What is your name?")
+      name <- getStrLn
+      _ <- putStrLn(s"Hello, ${name}, welcome to ZIO!")
+    } yield ()
+}
+```
+
+---
+# Coding a real service with Http4s
+
+Add an endpoint to retrieve a stock value. Wrong value should be rejected with an status explaining the error cause.
+
+Usage examples :
+
+ * GET /stock/1 -> `{"id":1,"value":100}`
+ * GET /stock/3 -> `{"Error":"Stock is empty"}`
+ * GET /stock/4 -> `{"Error":"Stock not found"}`
+
+Tip : use mapError on Task to returning a specific kind of error.
+
+---
+# Coding a real service with Http4s
+
+Create the associated tests.
+
+---
+# Coding a real service with Http4s
+
+Add an endpoint to update a stock value.
+
+---
+# Using the true power of ZIO
+
+Replace `Task[A]` by `IO[E,A]`
+
+---
+# Using the true power of ZIO
+
+Replace `IO[E,A]` by `ZIO[R,E,A]`
+
+---
+# Streaming with FS2
+
+Read a file with new stock information in streaming, add the results to the db results and stream the response over HTTP
+
+
+</textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script>
+    var slideshow = remark.create();
+</script>
+</body>
+</html>

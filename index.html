@@ -39,8 +39,8 @@ class: center, middle
 ZIO is a library for asynchronous and concurrent programming for Scala.
 
 * An IO can be Sync or Async in ZIO
-* Task[A] represents an IO that produces a A and can fail with any Throwable. It is an alias of IO[Throwable, A].
-* IO[E,A] represents an IO that produces a A can fail with a E.
+* Task[A] represents an IO that produces a A and can fail with any Throwable. It is an alias of IO[Throwable, A]
+* IO[E,A] represents an IO that produces a A can fail with a E
 
 ---
 
@@ -144,7 +144,7 @@ HTTP4s :
 ---
 # Coding a real service with Http4s
 
-Create the associated tests.
+Create the associated tests
 
 ---
 # Coding a real service with Http4s
@@ -170,7 +170,7 @@ Then replace `IO[E,A]` by `ZIO[R,E,A]` (see following slides)
 An IO in ZIO can take a third type parameter : `ZIO[R,E,A]` is equivalent to `IO[Any,E,A]`.
 
 The aim of this environment parameter is to ease testabilty an provide dependency injection mechanism needed to execute IOs,
-for example to a database.
+for example to a database
 
 ---
 
@@ -190,7 +190,7 @@ object ExtServicesLive extends ExtServices with Clock.Live {
 }
 ```
 
-In tests you can override ExtServices with a fake implementation.
+In tests you can override ExtServices with a fake implementation
 
 ---
 

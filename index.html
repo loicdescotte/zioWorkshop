@@ -36,7 +36,7 @@ class: center, middle
 
 # Introduction to ZIO
 
-ZIO is a library for asynchronous and concurrent programming for Scala.
+ZIO is a library for asynchronous and concurrent programming for Scala
 
 * An IO can be Sync or Async in ZIO
 * Task[A] represents an IO that produces a A and can fail with any Throwable. It is an alias of IO[Throwable, A]
@@ -108,11 +108,11 @@ Clone project on https://github.com/loicdescotte/zioWorkshop
 ---
 # Coding a real service with Http4s
            
-Checkout task-startPoint branch.           
+Checkout task-startPoint branch           
 
-Add an endpoint to retrieve a stock value. Wrong value should be rejected with a status explaining the error cause.
+Add an endpoint to retrieve a stock value. Wrong values should be rejected with a status explaining the error cause
 
-You should also display an error if the database connection is not working.
+You should also display an error if the database connection is not working
 
 Usage examples :
 
@@ -149,7 +149,7 @@ Create the associated tests
 ---
 # Coding a real service with Http4s
 
-Add a POST endpoint to update a stock value with an increment, and return the new value.
+Add a POST endpoint to update a stock value with an increment, and return the new value
     
 URL example (add 2 stocks for stock id 1) : /stock/1/2 
 
@@ -167,7 +167,7 @@ Then replace `IO[E,A]` by `ZIO[R,E,A]` (see following slides)
 
 # ZIO Environment
 
-An IO in ZIO can take a third type parameter : `ZIO[R,E,A]` is equivalent to `IO[Any,E,A]`.
+An IO in ZIO can take a third type parameter : `ZIO[R,E,A]` is equivalent to `IO[Any,E,A]`
 
 The aim of this environment parameter is to ease testabilty an provide dependency injection mechanism needed to execute IOs,
 for example to a database

@@ -17,7 +17,6 @@ object HTTPService extends Http4sDsl[Task] {
   val routes: HttpRoutes[Task] = HttpRoutes.of[Task] {
 
     case GET -> Root / "hello" =>
-      // retrieve stock in database
       Ok("hello")
   }
 }

@@ -214,8 +214,8 @@ object MyApp extends App {
   // program can be executed with a real or a test ExternalServices environment
   val program: ZIO[ExtServices, Throwable, Unit] = ???
 
-  //plug the real service
-  override def run(args: List[String]) = {
+  //plug the real service and eliminate the environment dependency
+  override def run(args: List[String]): IO[Nothing, Int] = {
     program.provide(ExtServicesLive).fold(_ => 1, _ => 0)
   }
 }

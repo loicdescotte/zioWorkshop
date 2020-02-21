@@ -187,7 +187,7 @@ Then replace `IO[E,A]` by `ZIO[R,E,A]` (see following slides)
 
 # ZIO Environment
 
-An IO in ZIO can take a third type parameter : `ZIO[R,E,A]` is equivalent to `IO[Any,E,A]`
+An IO in ZIO can take a third type parameter : `IO[E,A]` is equivalent to `ZIO[Any,E,A]`
 
 The aim of this environment parameter is to ease testabilty an provide dependency injection mechanism needed to execute IOs,
 for example to a database
